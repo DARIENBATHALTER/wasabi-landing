@@ -6,34 +6,31 @@ import {
   ChevronDown,
   ChevronRight,
   AlertTriangle,
-  GraduationCap,
-  Calendar,
-  Shield,
-  BookOpen,
-  Calculator,
 } from 'lucide-react'
 
 interface SectionProps {
   title: string
-  icon: React.ReactNode
   defaultOpen?: boolean
   statusColor: string
   tooltip?: string
+  borderClass?: string
   children: React.ReactNode
 }
 
-function CollapsibleSection({ title, icon, defaultOpen = false, statusColor, tooltip, children }: SectionProps) {
+function CollapsibleSection({ title, defaultOpen = false, statusColor, tooltip, borderClass, children }: SectionProps) {
   const [isOpen, setIsOpen] = useState(defaultOpen)
 
   return (
-    <div className="border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden relative">
+    <div className={`border rounded-lg overflow-hidden relative ${borderClass || 'border-gray-200 dark:border-gray-700'}`}>
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="w-full flex items-center gap-2.5 px-4 py-3 bg-gray-50 dark:bg-gray-800/50
-          hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors text-left"
+        className={`w-full flex items-center gap-2.5 px-4 py-3 transition-colors text-left ${
+          statusColor === 'bg-red-500' ? 'bg-red-50 dark:bg-red-950/30 hover:bg-red-100 dark:hover:bg-red-950/50'
+          : statusColor === 'bg-yellow-500' ? 'bg-yellow-50 dark:bg-yellow-950/30 hover:bg-yellow-100 dark:hover:bg-yellow-950/50'
+          : 'bg-gray-50 dark:bg-gray-800/50 hover:bg-gray-100 dark:hover:bg-gray-800'
+        }`}
       >
         <span className={`w-2.5 h-2.5 rounded-full flex-shrink-0 ${statusColor}`} />
-        <span className="text-wasabi-green">{icon}</span>
         <span className="flex-1 text-sm font-semibold text-gray-900 dark:text-white">{title}</span>
         {isOpen ? <ChevronDown size={16} className="text-gray-400" /> : <ChevronRight size={16} className="text-gray-400" />}
       </button>
@@ -98,22 +95,23 @@ export default function ProfileShowcase() {
         }`}
       >
         {/* Two-column layout: text left, card right */}
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-start">
+        <div className="grid md:grid-cols-2 gap-12 md:gap-16 items-start">
           {/* Left: Text */}
           <div>
-            <h2 className="font-display font-bold text-3xl sm:text-4xl lg:text-5xl text-gray-900 dark:text-white mb-4">
+            <h2 className="font-display font-bold text-3xl sm:text-4xl md:text-5xl text-gray-900 dark:text-white mb-4">
               Every data point,{' '}
               <span className="gradient-text">one screen</span>
             </h2>
             <p className="text-lg text-gray-600 dark:text-gray-400 mb-6 leading-relaxed">
-              No more toggling between 12 systems. WASABI pulls together every piece of student data
-              into a single, beautiful profile with collapsible sections you can drill into.
+              No more toggling between FOCUS, iReady, FAST, and a half-dozen other systems.
+              WASABI pulls together every piece of student data into a single, beautiful profile
+              with collapsible sections you can drill into.
             </p>
             <ul className="space-y-3 mb-8">
               {[
                 'Attendance, grades, assessments, and behavior — unified',
+                'Built around FOCUS, FAST, and iReady — the systems Florida schools actually use',
                 'Collapsible sections let you focus on what matters',
-                'Real-time data from every connected source',
                 'Trend charts show growth at a glance',
                 'Automatic flags highlight students who need support',
               ].map((item, i) => (
@@ -134,18 +132,18 @@ export default function ProfileShowcase() {
           </div>
 
           {/* Right: Live profile card */}
-          <div className="flex justify-center lg:justify-end">
-            <div className="relative w-full max-w-xl">
-              {/* "Live Preview" badge */}
-              <div className="absolute -top-3 left-5 z-10">
-                <span className="px-3 py-1 bg-wasabi-green text-white text-xs font-bold uppercase tracking-wider rounded-full shadow-md">
-                  Live Preview
+          <div className="flex justify-center md:justify-end">
+            <div className="relative w-full max-w-md">
+              {/* Interactive badge */}
+              <div className="absolute -top-4 left-5 z-10">
+                <span className="px-4 py-1.5 bg-blue-500 text-white text-sm font-bold rounded-full shadow-lg shadow-blue-500/25 animate-pulse">
+                  👆 Click me, I'm Interactive!
                 </span>
               </div>
 
               <GlassCard className="p-6 pt-8">
                 {/* Student header */}
-                <div className="flex items-start gap-4 mb-5">
+                <div className="flex items-center gap-4 mb-5">
                   <StudentAvatar
                     firstName="Maya"
                     lastName="Rodriguez"
@@ -157,18 +155,9 @@ export default function ProfileShowcase() {
                     <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-2">
                       Rodriguez, Maya
                     </h3>
-                    <div className="grid grid-cols-3 gap-2 mb-2.5">
-                      {[
-                        { label: 'Grade', value: '4' },
-                        { label: 'Homeroom', value: 'Mr. Thompson' },
-                        { label: 'ID', value: '#10045698' },
-                      ].map(info => (
-                        <div key={info.label} className="bg-gray-50 dark:bg-gray-700/40 rounded px-2.5 py-1.5">
-                          <p className="text-[10px] font-semibold text-gray-400 uppercase tracking-wider">{info.label}</p>
-                          <p className="text-sm font-medium text-gray-900 dark:text-white truncate">{info.value}</p>
-                        </div>
-                      ))}
-                    </div>
+                    <p className="text-sm text-gray-500 dark:text-gray-400 mb-2.5">
+                      Grade 4 &middot; Mr. Thompson &middot; #10045698
+                    </p>
                     <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-300 border border-red-200 dark:border-red-800">
                       <AlertTriangle size={12} />
                       iReady Reading — declining, below grade level
@@ -179,24 +168,52 @@ export default function ProfileShowcase() {
                 {/* Collapsible sections */}
                 <div className="space-y-2.5">
                   {/* ATTENDANCE */}
-                  <CollapsibleSection title="Attendance" icon={<Calendar size={16} />} statusColor="bg-green-500" tooltip="Track daily attendance with automatic rate calculations. Color-coded status dots tell you at a glance if a student is on track.">
-                    <div className="grid grid-cols-4 gap-2">
-                      {[
-                        { label: 'Rate', value: '96.2%', color: 'text-green-600' },
-                        { label: 'Present', value: '145', color: 'text-green-600' },
-                        { label: 'Absent', value: '6', color: 'text-red-600' },
-                        { label: 'Tardy', value: '3', color: 'text-yellow-600' },
-                      ].map(s => (
-                        <div key={s.label} className="bg-gray-50 dark:bg-gray-700/30 rounded p-2 text-center">
-                          <p className={`text-base font-bold ${s.color}`}>{s.value}</p>
-                          <p className="text-xs text-gray-500">{s.label}</p>
+                  <CollapsibleSection title="Attendance" statusColor="bg-yellow-500" borderClass="border-yellow-300 dark:border-yellow-600" tooltip="Track daily attendance with automatic rate calculations. Color-coded status dots tell you at a glance if a student is on track.">
+                    <div className="space-y-3">
+                      {/* Bar chart — last 45 school days */}
+                      <div>
+                        <p className="text-xs font-medium text-gray-500 dark:text-gray-400 mb-1.5">
+                          Daily Attendance — Last 45 School Days
+                        </p>
+                        <div className="flex h-10 rounded border border-gray-200 dark:border-gray-600 overflow-hidden">
+                          {'PPPPPPPTPPPPAPPPPPPPPTPPPPPAPPPPPPAAPPPPPTPPA'.split('').map((code, i) => (
+                            <div
+                              key={i}
+                              className={`flex-1 ${
+                                code === 'P' ? 'bg-green-200 dark:bg-green-500/30'
+                                : code === 'T' ? 'bg-yellow-200 dark:bg-yellow-500/30'
+                                : 'bg-red-200 dark:bg-red-500/30'
+                              }`}
+                              style={{ borderRight: i < 44 ? '0.5px solid rgba(0,0,0,0.05)' : 'none' }}
+                            />
+                          ))}
                         </div>
-                      ))}
+                      </div>
+                      {/* Legend */}
+                      <div className="flex justify-center gap-4 text-[10px] text-gray-500 dark:text-gray-400">
+                        <span className="inline-flex items-center gap-1"><span className="w-2.5 h-2.5 rounded-sm bg-green-200 dark:bg-green-500/30 border border-gray-300 dark:border-gray-600" />Present</span>
+                        <span className="inline-flex items-center gap-1"><span className="w-2.5 h-2.5 rounded-sm bg-yellow-200 dark:bg-yellow-500/30 border border-gray-300 dark:border-gray-600" />Tardy</span>
+                        <span className="inline-flex items-center gap-1"><span className="w-2.5 h-2.5 rounded-sm bg-red-200 dark:bg-red-500/30 border border-gray-300 dark:border-gray-600" />Absent</span>
+                      </div>
+                      {/* Stats */}
+                      <div className="grid grid-cols-4 gap-2">
+                        {[
+                          { label: 'Rate', value: '87.4%', color: 'text-yellow-600' },
+                          { label: 'Present', value: '131', color: 'text-green-600' },
+                          { label: 'Absent', value: '16', color: 'text-red-600' },
+                          { label: 'Tardy', value: '7', color: 'text-yellow-600' },
+                        ].map(s => (
+                          <div key={s.label} className="bg-gray-50 dark:bg-gray-700/30 rounded p-2 text-center">
+                            <p className={`text-base font-bold ${s.color}`}>{s.value}</p>
+                            <p className="text-xs text-gray-500">{s.label}</p>
+                          </div>
+                        ))}
+                      </div>
                     </div>
                   </CollapsibleSection>
 
                   {/* GRADES */}
-                  <CollapsibleSection title="Grades (GPA: 3.40)" icon={<GraduationCap size={16} />} statusColor="bg-green-500" tooltip="Quarter-by-quarter grades with auto-calculated GPA. Spot declining subjects before report cards go home.">
+                  <CollapsibleSection title="Grades (GPA: 3.40)" statusColor="bg-green-500" tooltip="Quarter-by-quarter grades with auto-calculated GPA. Spot declining subjects before report cards go home.">
                     <table className="w-full text-sm">
                       <thead>
                         <tr className="border-b border-gray-200 dark:border-gray-700">
@@ -225,7 +242,7 @@ export default function ProfileShowcase() {
                   </CollapsibleSection>
 
                   {/* iREADY — red indicator, danger highlighting inside */}
-                  <CollapsibleSection title="iReady" icon={<BookOpen size={16} />} statusColor="bg-red-500" tooltip="Diagnostic scores with trend graphs across testing windows. Red highlights flag declining performance so you can intervene early.">
+                  <CollapsibleSection title="iReady" statusColor="bg-red-500" borderClass="border-red-300 dark:border-red-700" tooltip="Diagnostic scores with trend graphs across testing windows. Red highlights flag declining performance so you can intervene early.">
                     <div className="space-y-3">
                       {/* Reading — DANGER: declining scores */}
                       <div className="rounded-lg bg-red-50 dark:bg-red-950/20 border border-red-200 dark:border-red-900/40 p-3 -mx-1">
@@ -278,7 +295,7 @@ export default function ProfileShowcase() {
                   </CollapsibleSection>
 
                   {/* FAST */}
-                  <CollapsibleSection title="FAST" icon={<Calculator size={16} />} statusColor="bg-green-500" tooltip="State assessment data imported directly from FAST exports. Three testing windows with proficiency tracking built in.">
+                  <CollapsibleSection title="FAST" statusColor="bg-green-500" tooltip="State assessment data imported directly from FAST exports. Three testing windows with proficiency tracking built in.">
                     <div className="space-y-3">
                       {/* ELA */}
                       <div>
@@ -328,7 +345,7 @@ export default function ProfileShowcase() {
                   </CollapsibleSection>
 
                   {/* DISCIPLINE */}
-                  <CollapsibleSection title="Discipline" icon={<Shield size={16} />} statusColor="bg-green-500" tooltip="Behavioral records with incident types, actions taken, and patterns over time. Green means no concerns.">
+                  <CollapsibleSection title="Discipline" statusColor="bg-green-500" tooltip="Behavioral records with incident types, actions taken, and patterns over time. Green means no concerns.">
                     <p className="text-sm text-gray-500 dark:text-gray-400 flex items-center gap-2">
                       <span className="w-2 h-2 rounded-full bg-green-500" />
                       No discipline records on file

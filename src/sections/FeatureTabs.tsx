@@ -2,7 +2,6 @@ import { useState, useEffect, useCallback, useRef } from 'react'
 import {
   BarChart3,
   ShieldAlert,
-  Bot,
   ClipboardList,
   FileUp,
   TrendingUp,
@@ -105,39 +104,7 @@ function EarlyWarningVisual() {
   )
 }
 
-function AIChatVisual() {
-  return (
-    <GlassCard className="p-6 w-full max-w-md mx-auto">
-      <div className="flex items-center gap-2 mb-5">
-        <div className="w-8 h-8 rounded-full bg-gradient-to-br from-purple-500 to-violet-600 flex items-center justify-center">
-          <Bot className="w-4 h-4 text-white" />
-        </div>
-        <span className="text-sm font-semibold text-gray-900 dark:text-white">Nori</span>
-        <span className="text-[10px] px-2 py-0.5 rounded-full bg-purple-100 dark:bg-purple-900/30 text-purple-600 dark:text-purple-300 font-semibold ml-auto">AI Assistant</span>
-      </div>
-      <div className="space-y-3">
-        <div className="bg-gray-100 dark:bg-gray-700 rounded-xl rounded-tl-sm p-3">
-          <p className="text-sm text-gray-700 dark:text-gray-300 leading-relaxed">
-            Show me all 3rd graders who scored below level on FAST but have a GPA above 3.0.
-          </p>
-        </div>
-        <div className="bg-wasabi-green/10 rounded-xl rounded-tr-sm p-3 ml-6">
-          <p className="text-sm text-gray-700 dark:text-gray-300 leading-relaxed">
-            Found <span className="font-semibold text-wasabi-green">7 students</span> matching
-            that criteria. 3 also have attendance flags. Want me to generate a report?
-          </p>
-        </div>
-        <div className="bg-gray-100 dark:bg-gray-700 rounded-xl rounded-tl-sm p-3">
-          <p className="text-sm text-gray-700 dark:text-gray-300 leading-relaxed">
-            Yes, and include their attendance trends for this semester.
-          </p>
-        </div>
-      </div>
-    </GlassCard>
-  )
-}
-
-function SOBAVisual() {
+function PDVisual() {
   const items = [
     { label: 'Classroom Management', rating: 5, checked: true },
     { label: 'Student Engagement', rating: 4, checked: true },
@@ -225,7 +192,8 @@ function DataImportVisual() {
           <p className="text-xs font-semibold text-wasabi-green">Custom Integrations</p>
         </div>
         <p className="text-xs text-gray-600 dark:text-gray-400 leading-relaxed">
-          Need a data source we don't support yet? We'll build a custom integration for
+          Need a data source we don't support yet? As a local partner, we'll work directly with
+          your team to build a custom integration for
           <span className="font-semibold text-gray-800 dark:text-gray-200"> any </span>
           system your school uses.
         </p>
@@ -241,10 +209,10 @@ const tabs: TabData[] = [
     icon: BarChart3,
     title: 'See the patterns that matter',
     description:
-      'From classroom-level snapshots to grade-wide trends, WASABI gives you the visual analytics tools to spot what matters and act on it.',
+      'From classroom-level snapshots to grade-wide trends, WASABI gives your school the visual analytics tools that big districts take for granted — without the big district price tag or complexity.',
     bullets: [
       'Class and grade-level performance dashboards',
-      'Trend analysis across multiple assessments',
+      'Trend analysis across FAST, iReady, and other Florida assessments',
       'Filterable charts by demographics and subgroups',
       'Export-ready reports for leadership and district',
     ],
@@ -256,7 +224,7 @@ const tabs: TabData[] = [
     icon: ShieldAlert,
     title: 'Catch it before it\'s too late',
     description:
-      'WASABI\'s early warning system automatically flags students who are showing signs of falling behind, so your team can intervene at the right time.',
+      'WASABI\'s early warning system automatically flags students who are showing signs of falling behind — pulling from FAST scores, iReady diagnostics, attendance, and grades — so your team can intervene at the right time.',
     bullets: [
       'Automatic flags for attendance, grades, and behavior',
       'Customizable thresholds for your school\'s needs',
@@ -266,34 +234,19 @@ const tabs: TabData[] = [
     visual: <EarlyWarningVisual />,
   },
   {
-    id: 'ai-assistant',
-    label: 'Nori AI',
-    icon: Bot,
-    title: 'Meet Nori, your data copilot',
-    description:
-      'Ask questions in plain English and get instant answers. Nori helps you explore your data, generate reports, and uncover insights you didn\'t know to look for.',
-    bullets: [
-      'Natural language queries over all your student data',
-      'Instant report generation and export',
-      'Smart suggestions based on your school\'s patterns',
-      'Privacy-first design: your data stays yours',
-    ],
-    visual: <AIChatVisual />,
-  },
-  {
-    id: 'soba',
-    label: 'SOBA',
+    id: 'pd',
+    label: 'Prof. Development',
     icon: ClipboardList,
     title: 'Structured classroom observations',
     description:
-      'SOBA (Structured Observation and Benchmarking Assessment) gives coaches and administrators a consistent, data-driven framework for classroom walkthroughs.',
+      'WASABI\'s built-in observation tool gives coaches and administrators a consistent, data-driven framework for classroom walkthroughs and professional development.',
     bullets: [
       'Customizable observation rubrics and checklists',
       'Real-time observation capture on any device',
       'Aggregate observation data across teachers',
       'Actionable feedback tied to professional development',
     ],
-    visual: <SOBAVisual />,
+    visual: <PDVisual />,
   },
   {
     id: 'data-import',
@@ -301,9 +254,9 @@ const tabs: TabData[] = [
     icon: FileUp,
     title: 'Works with the tools you already use',
     description:
-      'No complicated migrations or IT projects. Just drag, drop, and match. WASABI understands the formats your district already uses — and we\'ll build custom integrations for any data source you need.',
+      'No complicated migrations or IT projects. Just drag, drop, and match. WASABI natively understands FOCUS exports, FAST results, and iReady diagnostics — the formats Florida schools actually work with — and we\'ll build custom integrations for any other data source you need.',
     bullets: [
-      'Import from FOCUS, iReady, FAST, STAR, and more',
+      'Native support for FOCUS, iReady, FAST, STAR, and other Florida platforms',
       'Support for Excel, CSV, and standardized exports',
       'Smart column matching with fuzzy student lookup',
       'Custom integrations built for your school\'s unique data sources',
@@ -346,7 +299,7 @@ export default function FeatureTabs() {
       >
         {/* Heading */}
         <div className="text-center mb-12">
-          <h2 className="font-display font-bold text-3xl sm:text-4xl lg:text-5xl text-gray-900 dark:text-white mb-4">
+          <h2 className="font-display font-bold text-3xl sm:text-4xl md:text-5xl text-gray-900 dark:text-white mb-4">
             Everything you need,{' '}
             <span className="gradient-text">in one place</span>
           </h2>
@@ -374,7 +327,7 @@ export default function FeatureTabs() {
         </div>
 
         {/* Tab Content */}
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
+        <div className="grid md:grid-cols-2 gap-12 items-center">
           {/* Left: Text */}
           <div key={active.id} className="animate-fade-in">
             <h3 className="font-display font-bold text-2xl sm:text-3xl text-gray-900 dark:text-white mb-4">

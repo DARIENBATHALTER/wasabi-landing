@@ -30,7 +30,7 @@ export default function Footer() {
             />
             <div>
               <p className="font-display font-semibold text-white text-sm">WASABI</p>
-              <p className="text-xs text-gray-400">Built with care for educators</p>
+              <p className="text-xs text-gray-400">Built in Florida, with care, for Florida educators</p>
             </div>
           </div>
 
@@ -61,7 +61,7 @@ export default function Footer() {
           <p className="text-sm text-gray-500 flex items-center justify-center gap-1.5">
             Made with{' '}
             <Heart className="w-3.5 h-3.5 text-red-500 fill-red-500 inline" />{' '}
-            by educators who believe every student's story matters.
+            in Florida, by educators who believe every student's story matters.
           </p>
         </div>
       </div>

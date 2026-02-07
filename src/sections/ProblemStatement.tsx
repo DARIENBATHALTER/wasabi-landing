@@ -7,7 +7,7 @@ const painPoints = [
     icon: Layers,
     title: 'Scattered Data',
     description:
-      'Assessment scores in one system, attendance in another, grades in a third. Your students\u2019 stories are fragmented across a dozen platforms.',
+      'Assessment scores in FOCUS, diagnostics in iReady, state results in FAST. Your students\u2019 stories are fragmented across platforms that weren\u2019t designed to work together.',
     color: 'text-blue-500',
     bgColor: 'bg-blue-500/10',
   },
@@ -15,7 +15,7 @@ const painPoints = [
     icon: Clock,
     title: 'Hours of Manual Work',
     description:
-      'Teachers and admins spend countless hours compiling reports, matching spreadsheets, and chasing down numbers instead of teaching.',
+      'Teachers and admins at small and charter schools spend countless hours compiling reports, matching spreadsheets, and chasing down numbers — without the district-level analytics team to help.',
     color: 'text-amber-500',
     bgColor: 'bg-amber-500/10',
   },
@@ -48,16 +48,16 @@ export default function ProblemStatement() {
         }`}
       >
         {/* Heading */}
-        <div className="text-center max-w-3xl mx-auto mb-16">
-          <h2 className="font-display font-bold text-3xl sm:text-4xl lg:text-5xl text-gray-900 dark:text-white mb-6 leading-tight">
-            Your students' data shouldn't live in{' '}
+        <div className="text-center max-w-4xl mx-auto mb-16">
+          <h2 className="font-display font-bold text-3xl sm:text-4xl md:text-[2.75rem] text-gray-900 dark:text-white mb-6 leading-tight">
+            Your students' data shouldn't live in<br />
             <span className="text-red-500">12 different spreadsheets</span>
           </h2>
           <p className="text-lg text-gray-600 dark:text-gray-400 leading-relaxed">
-            Between FOCUS, iReady, FAST, STAR, attendance logs, and behavior tracking tools,
-            your school's most critical data is scattered across systems that don't talk to
-            each other. You know the full picture matters, but building it takes hours you
-            don't have.
+            Between FOCUS, iReady, FAST, STAR, and every other platform your school depends
+            on — your most critical student data is scattered across systems that don't talk
+            to each other. We work with these Florida systems every day, so we know the full
+            picture matters — and that building it takes hours you don't have.
           </p>
         </div>
 

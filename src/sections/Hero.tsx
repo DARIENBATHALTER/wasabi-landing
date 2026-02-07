@@ -1,87 +1,12 @@
-import { useState, useEffect, useCallback, useRef } from 'react'
-import { ChevronDown, ChevronLeft, ChevronRight, X, ZoomIn } from 'lucide-react'
-
-const HERO_COUNT = 16
-const START_IMAGE = 12 // always start on the colorful one
-
-// Build and shuffle hero images, but always start on #9
-const heroImages = (() => {
-  const imgs = Array.from({ length: HERO_COUNT }, (_, i) =>
-    `/hero/hero-${String(i + 1).padStart(2, '0')}.png`
-  )
-  const starter = imgs.splice(START_IMAGE - 1, 1)[0]
-  // Shuffle the rest
-  for (let i = imgs.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [imgs[i], imgs[j]] = [imgs[j], imgs[i]]
-  }
-  // Put #9 at the front
-  imgs.unshift(starter)
-  return imgs
-})()
+import { ChevronDown, Zap } from 'lucide-react'
+import HeroProfileCard from '../components/HeroProfileCard'
 
 export default function Hero() {
-  const [activeIndex, setActiveIndex] = useState(0)
-  const [nextIndex, setNextIndex] = useState(1)
-  const [isFading, setIsFading] = useState(false)
-  const [modalIndex, setModalIndex] = useState<number | null>(null)
-  const timerRef = useRef<ReturnType<typeof setInterval>>(null)
-
-  // Preload the next image so there's no grey flash
-  useEffect(() => {
-    const upcoming = (activeIndex + 1) % heroImages.length
-    const img = new Image()
-    img.src = heroImages[upcoming]
-  }, [activeIndex])
-
-  const advanceSlide = useCallback(() => {
-    const next = (activeIndex + 1) % heroImages.length
-    setNextIndex(next)
-    setIsFading(true)
-  }, [activeIndex])
-
-  // When fade-out completes, swap active to next
-  const handleTransitionEnd = useCallback(() => {
-    if (isFading) {
-      setActiveIndex(nextIndex)
-      setIsFading(false)
-    }
-  }, [isFading, nextIndex])
-
-  // Auto-advance every 5 seconds, pause when modal is open
-  useEffect(() => {
-    if (modalIndex !== null) return
-    timerRef.current = setInterval(advanceSlide, 5000)
-    return () => { if (timerRef.current) clearInterval(timerRef.current) }
-  }, [advanceSlide, modalIndex])
-
-  // Modal navigation
-  const modalPrev = useCallback(() => {
-    setModalIndex(prev => prev === null ? null : (prev - 1 + heroImages.length) % heroImages.length)
-  }, [])
-  const modalNext = useCallback(() => {
-    setModalIndex(prev => prev === null ? null : (prev + 1) % heroImages.length)
-  }, [])
-
-  // Keyboard nav for modal
-  useEffect(() => {
-    if (modalIndex === null) return
-    const handleKey = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') setModalIndex(null)
-      if (e.key === 'ArrowLeft') modalPrev()
-      if (e.key === 'ArrowRight') modalNext()
-    }
-    window.addEventListener('keydown', handleKey)
-    return () => window.removeEventListener('keydown', handleKey)
-  }, [modalIndex, modalPrev, modalNext])
-
-  const scrollToFeatures = () => {
-    const el = document.querySelector('#features')
-    if (el) el.scrollIntoView({ behavior: 'smooth' })
-  }
-
   return (
-    <section className="relative min-h-screen flex items-center overflow-hidden">
+    <section
+      className="relative flex items-center overflow-hidden"
+      style={{ minHeight: 'calc(100vh / var(--page-zoom, 1))' }}
+    >
       {/* Background — full green-tinted gradient */}
       <div className="absolute inset-0 bg-gradient-to-b from-wasabi-dark via-[#0f1f15] to-gray-900">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_60%_at_50%_40%,rgba(0,136,0,0.12),transparent)]" />
@@ -97,98 +22,60 @@ export default function Hero() {
         />
       </div>
 
+      {/* Florida silhouette — centered behind entire hero section */}
+      <div className="absolute z-[5] left-[2%] w-[780px] h-[1092px] opacity-[0.2] pointer-events-none" style={{ top: '50%', transform: 'translateY(calc(-50% + 105px))' }}>
+        <img src="/florida.svg" alt="" className="w-full h-full object-contain" />
+      </div>
+
       {/* Content */}
-      <div className="relative z-10 section-container py-24 lg:py-32">
-        <div className="grid lg:grid-cols-[5fr_8fr] gap-10 lg:gap-12 items-center">
-          {/* Left: Text content (compact) */}
-          <div className="text-left">
-            <div className="flex items-center gap-3 mb-5">
-              <img
-                src="/wasabilogo.png"
-                alt="WASABI Logo"
-                className="w-12 h-12 drop-shadow-[0_0_20px_rgba(0,136,0,0.3)]"
-              />
-            </div>
+      <div className="relative z-10 section-container py-24 md:py-32">
+        {/* Title — full width, left aligned */}
+        <div className="mb-10 md:mb-12 animate-fade-in">
+          <h1 className="font-display font-bold text-4xl sm:text-5xl md:text-[3.5rem] text-white tracking-tight leading-[1.12]">
+            Actionable student insights from{' '}
+            <span className="text-wasabi-green underline decoration-wasabi-green/60 underline-offset-4">all</span>{' '}
+            of your data sources.
+          </h1>
+        </div>
 
-            <h1 className="font-display font-bold text-4xl sm:text-5xl lg:text-6xl text-white mb-2 tracking-tight animate-fade-in">
-              WASABI
-            </h1>
-
-            <p className="font-display font-semibold text-base sm:text-lg text-gray-300 mb-5 animate-fade-in tracking-wide">
-              Wide Array Student Analytic &amp; Benchmark Interface
+        {/* Two columns: subtext + CTAs left, animated card right */}
+        <div className="grid md:grid-cols-[5fr_5fr] gap-10 md:gap-8 items-center">
+          {/* Left: subtext + CTAs — vertically centered */}
+          <div className="animate-fade-in-up">
+            <p className="text-base sm:text-lg text-gray-400 max-w-lg mb-8 leading-relaxed">
+              <em className="text-gray-300">Built in Florida, for Florida schools.</em>
+              <br /><br />
+              WASABI isn't another KPI dashboard — it's a home base for everything you know
+              about your students. Attendance, grades, assessments, observations, and professional
+              development tools, all in one place — plus a fully FERPA-compliant AI assistant,
+              Nori, who works as your personal data analyst.
             </p>
 
-            <p className="text-sm sm:text-base text-gray-400 max-w-md mb-7 animate-fade-in-up leading-relaxed">
-              The all-in-one analytics platform built for charter schools. Bring together
-              attendance, grades, assessments, and behavioral data into a single dashboard —
-              so you can see every student's full story and act before it's too late.
-            </p>
-
-            <div className="flex flex-col sm:flex-row items-start gap-3 animate-fade-in-up">
+            <div className="flex flex-col sm:flex-row items-start gap-4">
               <a
                 href="/try"
-                className="btn-primary text-base !px-7 !py-3.5 shadow-lg shadow-wasabi-green/20"
+                className="btn-primary text-lg !px-8 !py-4 shadow-lg shadow-wasabi-green/25 inline-flex items-center gap-2.5 group whitespace-nowrap"
               >
-                Try WASABI
+                <Zap className="w-5 h-5" />
+                Try WASABI Now
               </a>
               <button
-                onClick={scrollToFeatures}
-                className="btn-secondary text-base !px-7 !py-3.5 !border-gray-500 !text-gray-300 hover:!border-wasabi-green hover:!text-green-400"
+                onClick={() => document.querySelector('#cta')?.scrollIntoView({ behavior: 'smooth' })}
+                className="btn-secondary text-lg !px-8 !py-4 !border-gray-500 !text-gray-300 hover:!border-wasabi-green hover:!text-green-400 inline-flex items-center gap-2.5 whitespace-nowrap"
               >
-                Learn More
+                Get in Touch
               </button>
             </div>
           </div>
 
-          {/* Right: Hero screenshot slideshow — 35% larger */}
-          <div className="flex justify-center lg:justify-end animate-fade-in">
-            <div
-              className="relative w-full max-w-[48rem]"
-              style={{ perspective: '1200px' }}
-            >
-              <div
-                className="relative rounded-xl overflow-hidden shadow-2xl shadow-black/40 border border-gray-700/50 group"
-                style={{
-                  transform: 'rotateY(-6deg) rotateX(2deg)',
-                  transformOrigin: 'center center',
-                  cursor: 'zoom-in',
-                }}
-                onClick={() => setModalIndex(activeIndex)}
-              >
-                {/* 16:9 aspect ratio container */}
-                <div className="relative w-full" style={{ paddingBottom: '57.8%' }}>
-                  <div className="absolute inset-0 bg-gray-800">
-                    {/* Back layer: next image (always visible underneath) */}
-                    <img
-                      src={heroImages[nextIndex]}
-                      alt={`WASABI screenshot ${nextIndex + 1}`}
-                      className="absolute inset-0 w-full h-full object-cover object-top"
-                    />
-                    {/* Front layer: current image (fades out to reveal next) */}
-                    <img
-                      src={heroImages[activeIndex]}
-                      alt={`WASABI screenshot ${activeIndex + 1}`}
-                      className={`absolute inset-0 w-full h-full object-cover object-top transition-opacity duration-700 ease-in-out ${
-                        isFading ? 'opacity-0' : 'opacity-100'
-                      }`}
-                      onTransitionEnd={handleTransitionEnd}
-                    />
-                  </div>
-                </div>
-
-                {/* Zoom hint on hover */}
-                <div className="absolute inset-0 flex items-center justify-center bg-black/0 group-hover:bg-black/20 transition-colors duration-200 pointer-events-none">
-                  <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-200 bg-black/60 rounded-full p-3">
-                    <ZoomIn className="w-6 h-6 text-white" />
-                  </div>
-                </div>
-
-                {/* Glass reflection effect */}
-                <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/[0.03] to-white/[0.08] pointer-events-none" />
+          {/* Right: Animated profile card — fixed height, card anchored at center */}
+          <div className="relative md:h-[26rem] overflow-visible animate-fade-in">
+            <div className="md:absolute md:inset-x-0 md:top-1/2 md:-translate-y-1/2 flex justify-center md:justify-center md:px-12">
+              <div className="relative w-full max-w-xs md:max-w-sm">
+                <HeroProfileCard />
+                {/* Subtle glow behind the card */}
+                <div className="absolute -inset-4 bg-wasabi-green/10 rounded-2xl blur-2xl -z-10" />
               </div>
-
-              {/* Subtle glow behind the "product box" */}
-              <div className="absolute -inset-4 bg-wasabi-green/10 rounded-2xl blur-2xl -z-10" />
             </div>
           </div>
         </div>
@@ -197,75 +84,13 @@ export default function Hero() {
       {/* Scroll indicator */}
       <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10">
         <button
-          onClick={scrollToFeatures}
+          onClick={() => document.querySelector('#features')?.scrollIntoView({ behavior: 'smooth' })}
           className="text-gray-400 hover:text-wasabi-green transition-colors animate-bounce"
           aria-label="Scroll to features"
         >
           <ChevronDown size={32} />
         </button>
       </div>
-
-      {/* Lightbox modal */}
-      {modalIndex !== null && (
-        <div
-          className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-black/85 backdrop-blur-sm animate-fade-in"
-          onClick={() => setModalIndex(null)}
-        >
-          {/* Close */}
-          <button
-            onClick={() => setModalIndex(null)}
-            className="absolute top-6 right-6 text-white/70 hover:text-white transition-colors z-10"
-            aria-label="Close"
-          >
-            <X size={28} />
-          </button>
-
-          {/* Prev / Next arrows */}
-          <button
-            onClick={(e) => { e.stopPropagation(); modalPrev() }}
-            className="absolute left-4 top-1/2 -translate-y-1/2 text-white/60 hover:text-white transition-colors z-10"
-            aria-label="Previous"
-          >
-            <ChevronLeft size={36} />
-          </button>
-          <button
-            onClick={(e) => { e.stopPropagation(); modalNext() }}
-            className="absolute right-4 top-1/2 -translate-y-1/2 text-white/60 hover:text-white transition-colors z-10"
-            aria-label="Next"
-          >
-            <ChevronRight size={36} />
-          </button>
-
-          {/* Image */}
-          <img
-            src={heroImages[modalIndex]}
-            alt={`WASABI screenshot ${modalIndex + 1}`}
-            className="max-w-[90vw] max-h-[80vh] rounded-lg shadow-2xl object-contain"
-            onClick={(e) => e.stopPropagation()}
-          />
-
-          {/* Counter */}
-          <p className="text-white/60 text-sm mt-3">
-            {modalIndex + 1} / {heroImages.length}
-          </p>
-
-          {/* Dot indicators */}
-          <div className="flex justify-center gap-1.5 mt-3" onClick={(e) => e.stopPropagation()}>
-            {heroImages.map((_, i) => (
-              <button
-                key={i}
-                onClick={() => setModalIndex(i)}
-                className={`h-1.5 rounded-full transition-all duration-300 ${
-                  i === modalIndex
-                    ? 'bg-wasabi-green w-4'
-                    : 'bg-gray-600 hover:bg-gray-400 w-1.5'
-                }`}
-                aria-label={`View screenshot ${i + 1}`}
-              />
-            ))}
-          </div>
-        </div>
-      )}
     </section>
   )
 }

@@ -20,7 +20,7 @@ const stats = [
   {
     end: 1,
     suffix: '',
-    label: 'Platform to Rule Them All',
+    label: 'Local Team, One Call Away',
   },
 ]
 
@@ -49,10 +49,10 @@ export default function StatsSection() {
           isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
         }`}
       >
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12">
           {stats.map((stat) => (
             <div key={stat.label} className="text-center">
-              <div className="font-display font-bold text-4xl sm:text-5xl lg:text-6xl text-white mb-2">
+              <div className="font-display font-bold text-4xl sm:text-5xl md:text-6xl text-white mb-2">
                 <AnimatedCounter
                   end={stat.end}
                   suffix={stat.suffix}
