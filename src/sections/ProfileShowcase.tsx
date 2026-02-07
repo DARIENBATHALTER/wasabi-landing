@@ -123,12 +123,14 @@ export default function ProfileShowcase() {
                 </li>
               ))}
             </ul>
-            <a
-              href="/try"
-              className="btn-primary inline-flex items-center gap-2 text-sm"
-            >
-              See it in action
-            </a>
+            <div className="text-center md:text-left">
+              <a
+                href="/try"
+                className="btn-primary inline-flex items-center gap-2 text-sm"
+              >
+                See it in action
+              </a>
+            </div>
           </div>
 
           {/* Right: Live profile card */}

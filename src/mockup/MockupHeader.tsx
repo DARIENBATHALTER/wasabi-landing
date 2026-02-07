@@ -57,21 +57,24 @@ export default function MockupHeader() {
 
   return (
     <header className="h-16 bg-gray-800 border-b border-gray-700/50 flex items-center px-4 gap-4 flex-shrink-0">
-      {/* Mobile hamburger */}
-      <button
-        onClick={() => setSidebarOpen(true)}
-        className="lg:hidden p-2 text-gray-400 hover:text-white transition-colors rounded-lg hover:bg-gray-700"
-      >
-        <Menu size={22} />
-      </button>
+      {/* Left side — matches right side width for centering */}
+      <div className="flex items-center gap-2 flex-1 min-w-0">
+        {/* Mobile hamburger */}
+        <button
+          onClick={() => setSidebarOpen(true)}
+          className="lg:hidden p-2 text-gray-400 hover:text-white transition-colors rounded-lg hover:bg-gray-700"
+        >
+          <Menu size={22} />
+        </button>
 
-      {/* Logo (visible on mobile when sidebar hidden) */}
-      <Link to="/try" className="lg:hidden flex items-center gap-2">
-        <img src="/wasabilogo.png" alt="WASABI" className="w-7 h-7" />
-        <span className="hidden sm:inline text-white font-display font-bold text-base">WASABI</span>
-      </Link>
+        {/* Logo (visible on mobile when sidebar hidden) */}
+        <Link to="/try" className="lg:hidden flex items-center gap-2">
+          <img src="/wasabilogo.png" alt="WASABI" className="w-7 h-7" />
+          <span className="hidden sm:inline text-white font-display font-bold text-base">WASABI</span>
+        </Link>
+      </div>
 
-      {/* Search */}
+      {/* Search — centered */}
       <div data-tour="search" ref={searchRef} className="flex-1 max-w-xl relative">
         <div className="relative flex items-center">
           <Search size={18} className="absolute left-3 text-gray-400 pointer-events-none" />
@@ -131,7 +134,7 @@ export default function MockupHeader() {
       </div>
 
       {/* Right side */}
-      <div className="flex items-center gap-2">
+      <div className="flex items-center justify-end gap-2 flex-1 min-w-0">
         {/* Selected student count */}
         {selectedStudents.length > 0 && (
           <div className="hidden sm:flex items-center gap-1.5 px-2.5 py-1 bg-wasabi-green/20 border border-wasabi-green/30 rounded-full">

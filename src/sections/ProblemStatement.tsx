@@ -110,7 +110,12 @@ export default function ProblemStatement() {
             </span>
             .
           </p>
-          <img src="/wasabilogo.png" alt="" className="md:hidden w-12 h-12 mx-auto mt-6 opacity-80" />
+          {/* Mobile separator */}
+          <div className="md:hidden mt-8 flex items-center justify-center gap-4">
+            <div className="flex-1 h-px bg-gray-200 dark:bg-gray-700" />
+            <img src="/wasabilogo.png" alt="" className="w-8 h-8 opacity-60" />
+            <div className="flex-1 h-px bg-gray-200 dark:bg-gray-700" />
+          </div>
         </div>
       </div>
     </section>

@@ -55,7 +55,7 @@ export default function Hero() {
               Nori, who works as your personal data analyst.
             </p>
 
-            <div className="flex flex-col sm:flex-row items-start gap-4">
+            <div className="flex flex-col md:flex-row items-center md:items-start gap-4">
               <a
                 href="/try"
                 className="btn-primary text-lg !px-8 !py-4 shadow-lg shadow-wasabi-green/25 inline-flex items-center gap-2.5 group whitespace-nowrap"
