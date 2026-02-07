@@ -49,10 +49,8 @@ export default function Hero() {
             <p className="text-base sm:text-lg text-gray-400 max-w-lg mb-8 leading-relaxed">
               <em className="text-gray-300">Built in Florida, for Florida schools.</em>
               <br /><br />
-              WASABI isn't another KPI dashboard — it's a home base for everything you know
-              about your students. Attendance, grades, assessments, observations, and professional
-              development tools, all in one place — plus a fully FERPA-compliant AI assistant,
-              Nori, who works as your personal data analyst.
+              WASABI brings attendance, grades, assessments, and more into one unified
+              student profile — so your team can spot what matters and act before it's too late.
             </p>
 
             <div className="flex flex-col md:flex-row items-center md:items-start gap-4">
@@ -65,9 +63,10 @@ export default function Hero() {
               </a>
               <button
                 onClick={() => document.querySelector('#cta')?.scrollIntoView({ behavior: 'smooth' })}
-                className="btn-secondary text-lg !px-8 !py-4 !border-gray-500 !text-gray-300 hover:!border-wasabi-green hover:!text-green-400 inline-flex items-center gap-2.5 whitespace-nowrap"
+                className="text-lg !px-8 !py-4 border-2 border-white/30 text-white hover:border-wasabi-green hover:text-wasabi-green
+                  rounded-lg transition-all duration-200 font-medium inline-flex items-center gap-2.5 whitespace-nowrap"
               >
-                Get in Touch
+                Book a Walkthrough
               </button>
             </div>
           </div>
