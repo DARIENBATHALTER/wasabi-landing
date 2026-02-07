@@ -68,7 +68,7 @@ export default function MockupHeader() {
       {/* Logo (visible on mobile when sidebar hidden) */}
       <Link to="/try" className="lg:hidden flex items-center gap-2">
         <img src="/wasabilogo.png" alt="WASABI" className="w-7 h-7" />
-        <span className="text-white font-display font-bold text-base">WASABI</span>
+        <span className="hidden sm:inline text-white font-display font-bold text-base">WASABI</span>
       </Link>
 
       {/* Search */}

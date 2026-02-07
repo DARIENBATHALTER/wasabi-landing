@@ -22,8 +22,12 @@ export default function Hero() {
         />
       </div>
 
-      {/* Florida silhouette — centered behind entire hero section */}
-      <div className="absolute z-[5] left-[2%] w-[780px] h-[1092px] opacity-[0.2] pointer-events-none" style={{ top: '50%', transform: 'translateY(calc(-50% + 105px))' }}>
+      {/* Florida silhouette — desktop */}
+      <div className="hidden md:block absolute z-[5] left-[2%] w-[780px] h-[1092px] opacity-[0.2] pointer-events-none" style={{ top: '50%', transform: 'translateY(calc(-50% + 105px))' }}>
+        <img src="/florida.svg" alt="" className="w-full h-full object-contain" />
+      </div>
+      {/* Florida silhouette — mobile: smaller, centered behind title */}
+      <div className="md:hidden absolute z-[5] left-1/2 -translate-x-1/2 top-[12%] w-[280px] h-[392px] opacity-[0.15] pointer-events-none">
         <img src="/florida.svg" alt="" className="w-full h-full object-contain" />
       </div>
 
@@ -69,7 +73,7 @@ export default function Hero() {
           </div>
 
           {/* Right: Animated profile card — fixed height, card anchored at center */}
-          <div className="relative md:h-[26rem] overflow-visible animate-fade-in">
+          <div className="relative h-[30rem] md:h-[26rem] overflow-hidden md:overflow-visible animate-fade-in">
             <div className="md:absolute md:inset-x-0 md:top-1/2 md:-translate-y-1/2 flex justify-center md:justify-center md:px-12">
               <div className="relative w-full max-w-xs md:max-w-sm">
                 <HeroProfileCard />

@@ -1,5 +1,3 @@
-import { Heart } from 'lucide-react'
-
 const footerLinks = [
   { label: 'Features', href: '#features' },
   { label: 'Demo', href: '/try' },
@@ -56,14 +54,6 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* Bottom line */}
-        <div className="mt-8 pt-6 border-t border-gray-800 text-center">
-          <p className="text-sm text-gray-500 flex items-center justify-center gap-1.5">
-            Made with{' '}
-            <Heart className="w-3.5 h-3.5 text-red-500 fill-red-500 inline" />{' '}
-            in Florida, by educators who believe every student's story matters.
-          </p>
-        </div>
       </div>
     </footer>
   )

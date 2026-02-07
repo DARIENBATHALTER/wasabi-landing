@@ -290,7 +290,7 @@ export default function FeatureTabs() {
   const active = tabs[activeTab]
 
   return (
-    <section id="features" className="py-24 bg-white dark:bg-gray-950 relative">
+    <section id="features" className="py-14 md:py-24 bg-white dark:bg-gray-950 relative">
       <div
         ref={ref}
         className={`section-container transition-all duration-700 ${

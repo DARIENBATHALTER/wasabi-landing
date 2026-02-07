@@ -83,7 +83,7 @@ export default function ProfileShowcase() {
   const { ref, isVisible } = useScrollAnimation()
 
   return (
-    <section className="py-24 bg-gray-50 dark:bg-gray-900 relative overflow-hidden">
+    <section className="py-14 md:py-24 bg-gray-50 dark:bg-gray-900 relative overflow-hidden">
       {/* Background accents */}
       <div className="absolute top-0 left-1/3 w-96 h-96 bg-wasabi-green/3 rounded-full blur-3xl" />
       <div className="absolute bottom-0 right-1/4 w-80 h-80 bg-emerald-500/3 rounded-full blur-3xl" />

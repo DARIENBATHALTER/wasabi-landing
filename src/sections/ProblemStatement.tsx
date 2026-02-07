@@ -35,7 +35,7 @@ export default function ProblemStatement() {
   return (
     <section
       id="about"
-      className="py-24 bg-gray-50 dark:bg-gray-900 relative overflow-hidden"
+      className="py-14 md:py-24 bg-gray-50 dark:bg-gray-900 relative overflow-hidden"
     >
       {/* Subtle background accent */}
       <div className="absolute top-0 right-0 w-96 h-96 bg-red-500/3 rounded-full blur-3xl" />
@@ -61,15 +61,14 @@ export default function ProblemStatement() {
           </p>
         </div>
 
-        {/* Pain Point Cards */}
-        <div className="grid md:grid-cols-3 gap-8 mb-16">
+        {/* Pain Point Cards — desktop */}
+        <div className="hidden md:grid md:grid-cols-3 gap-8 mb-16">
           {painPoints.map((point, index) => (
             <GlassCard
               key={point.title}
               className={`p-8 text-center transition-all duration-500 hover:-translate-y-1 hover:shadow-xl ${
                 isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
               }`}
-              // stagger animation
             >
               <div
                 className={`w-16 h-16 rounded-2xl ${point.bgColor} flex items-center justify-center mx-auto mb-5`}
@@ -87,7 +86,22 @@ export default function ProblemStatement() {
           ))}
         </div>
 
-        {/* Transition Line */}
+        {/* Pain Points — mobile bullet list */}
+        <div className="md:hidden space-y-4 mb-10">
+          {painPoints.map((point) => (
+            <div key={point.title} className="flex items-start gap-3">
+              <div className={`w-8 h-8 rounded-lg ${point.bgColor} flex items-center justify-center flex-shrink-0 mt-0.5`}>
+                <point.icon className={`w-4 h-4 ${point.color}`} />
+              </div>
+              <div>
+                <p className="font-semibold text-gray-900 dark:text-white text-sm">{point.title}</p>
+                <p className="text-sm text-gray-600 dark:text-gray-400 leading-relaxed">{point.description}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Transition Line + mobile logo bridge */}
         <div className="text-center">
           <p className="font-display font-semibold text-2xl sm:text-3xl text-gray-900 dark:text-white">
             There's a{' '}
@@ -96,6 +110,7 @@ export default function ProblemStatement() {
             </span>
             .
           </p>
+          <img src="/wasabilogo.png" alt="" className="md:hidden w-12 h-12 mx-auto mt-6 opacity-80" />
         </div>
       </div>
     </section>

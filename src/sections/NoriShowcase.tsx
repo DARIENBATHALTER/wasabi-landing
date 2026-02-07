@@ -64,7 +64,7 @@ export default function NoriShowcase() {
   const showNori = phase === 'nori-typing' || phase === 'done'
 
   return (
-    <section className="py-24 bg-white dark:bg-gray-950 relative overflow-hidden">
+    <section className="py-14 md:py-24 bg-white dark:bg-gray-950 relative overflow-hidden">
       {/* Background accents */}
       <div className="absolute top-1/2 left-1/4 w-96 h-96 bg-purple-500/5 rounded-full blur-3xl" />
       <div className="absolute bottom-0 right-1/3 w-80 h-80 bg-violet-500/5 rounded-full blur-3xl" />
@@ -186,6 +186,13 @@ export default function NoriShowcase() {
               </p>
             </div>
           ))}
+        </div>
+
+        {/* Mobile separator */}
+        <div className="md:hidden mt-10 flex items-center justify-center gap-4">
+          <div className="flex-1 h-px bg-gray-200 dark:bg-gray-700" />
+          <img src="/wasabilogo.png" alt="" className="w-8 h-8 opacity-60" />
+          <div className="flex-1 h-px bg-gray-200 dark:bg-gray-700" />
         </div>
       </div>
     </section>
