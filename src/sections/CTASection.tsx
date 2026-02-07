@@ -26,7 +26,7 @@ export default function CTASection() {
 
         <div className="flex flex-col items-center gap-6">
           <a
-            href="/wasabi-landing/try"
+            href="/try"
             className="btn-primary text-xl !px-10 !py-5 shadow-lg shadow-wasabi-green/25 inline-flex items-center gap-3 group"
           >
             Try WASABI

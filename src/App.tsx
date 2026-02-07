@@ -8,7 +8,7 @@ function LoadingScreen() {
   return (
     <div className="min-h-screen bg-wasabi-dark flex items-center justify-center">
       <div className="text-center">
-        <img src="/wasabi-landing/wasabilogo.png" alt="WASABI" className="w-16 h-16 mx-auto mb-4 animate-pulse-soft" />
+        <img src="/wasabilogo.png" alt="WASABI" className="w-16 h-16 mx-auto mb-4 animate-pulse-soft" />
         <p className="text-gray-400 text-sm">Loading WASABI Demo...</p>
       </div>
     </div>

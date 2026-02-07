@@ -2,7 +2,7 @@ import { Heart } from 'lucide-react'
 
 const footerLinks = [
   { label: 'Features', href: '#features' },
-  { label: 'Demo', href: '/wasabi-landing/try' },
+  { label: 'Demo', href: '/try' },
   { label: 'About', href: '#about' },
 ]
 
@@ -24,7 +24,7 @@ export default function Footer() {
           {/* Left: Logo + Tagline */}
           <div className="flex items-center gap-3 md:justify-start justify-center">
             <img
-              src="/wasabi-landing/wasabilogo.png"
+              src="/wasabilogo.png"
               alt="WASABI Logo"
               className="w-8 h-8"
             />

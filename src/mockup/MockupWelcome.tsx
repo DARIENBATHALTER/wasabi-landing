@@ -67,7 +67,7 @@ export default function MockupWelcome() {
       {/* Logo and title */}
       <div data-tour="welcome" className="text-center mb-10 animate-fade-in">
         <img
-          src="/wasabi-landing/wasabilogo.png"
+          src="/wasabilogo.png"
           alt="WASABI"
           className="w-20 h-20 mx-auto mb-5 animate-float"
         />

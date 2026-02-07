@@ -3,7 +3,7 @@ import { Menu, X } from 'lucide-react'
 
 const navLinks = [
   { label: 'Features', href: '#features' },
-  { label: 'Demo', href: '/wasabi-landing/try' },
+  { label: 'Demo', href: '/try' },
   { label: 'About', href: '#about' },
 ]
 
@@ -51,9 +51,9 @@ export default function Navbar() {
       >
         <div className="section-container flex items-center justify-between">
           {/* Logo + Name */}
-          <a href="/wasabi-landing/" className="flex items-center gap-2.5 group">
+          <a href="/" className="flex items-center gap-2.5 group">
             <img
-              src="/wasabi-landing/wasabilogo.png"
+              src="/wasabilogo.png"
               alt="WASABI Logo"
               className={`transition-all duration-300 ${
                 isScrolled ? 'w-8 h-8' : 'w-9 h-9'
@@ -86,7 +86,7 @@ export default function Navbar() {
           {/* Desktop Right Side */}
           <div className="hidden md:flex items-center gap-3">
             <a
-              href="/wasabi-landing/try"
+              href="/try"
               className="btn-primary text-sm !px-5 !py-2.5"
             >
               Try WASABI
@@ -152,7 +152,7 @@ export default function Navbar() {
           ))}
           <div className="mt-4 pt-4 border-t border-gray-200 dark:border-gray-700">
             <a
-              href="/wasabi-landing/try"
+              href="/try"
               className="btn-primary block text-center"
               onClick={() => setIsMobileOpen(false)}
             >

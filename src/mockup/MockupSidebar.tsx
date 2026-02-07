@@ -64,7 +64,7 @@ export default function MockupSidebar() {
       <div className="flex items-center justify-between px-4 h-16 border-b border-gray-700/50">
         <Link to="/try" className="flex items-center gap-3" onClick={() => setSidebarOpen(false)}>
           <img
-            src="/wasabi-landing/wasabilogo.png"
+            src="/wasabilogo.png"
             alt="WASABI"
             className="w-8 h-8"
           />

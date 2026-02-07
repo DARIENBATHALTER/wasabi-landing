@@ -7,7 +7,7 @@ const START_IMAGE = 12 // always start on the colorful one
 // Build and shuffle hero images, but always start on #9
 const heroImages = (() => {
   const imgs = Array.from({ length: HERO_COUNT }, (_, i) =>
-    `/wasabi-landing/hero/hero-${String(i + 1).padStart(2, '0')}.png`
+    `/hero/hero-${String(i + 1).padStart(2, '0')}.png`
   )
   const starter = imgs.splice(START_IMAGE - 1, 1)[0]
   // Shuffle the rest
@@ -104,7 +104,7 @@ export default function Hero() {
           <div className="text-left">
             <div className="flex items-center gap-3 mb-5">
               <img
-                src="/wasabi-landing/wasabilogo.png"
+                src="/wasabilogo.png"
                 alt="WASABI Logo"
                 className="w-12 h-12 drop-shadow-[0_0_20px_rgba(0,136,0,0.3)]"
               />
@@ -126,7 +126,7 @@ export default function Hero() {
 
             <div className="flex flex-col sm:flex-row items-start gap-3 animate-fade-in-up">
               <a
-                href="/wasabi-landing/try"
+                href="/try"
                 className="btn-primary text-base !px-7 !py-3.5 shadow-lg shadow-wasabi-green/20"
               >
                 Try WASABI

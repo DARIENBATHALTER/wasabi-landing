@@ -251,7 +251,7 @@ function ReportPreview({ student, reportType }: { student: DemoStudent; reportTy
         <div className="flex items-start justify-between">
           <div>
             <div className="flex items-center gap-2 mb-2">
-              <img src="/wasabi-landing/wasabilogo.png" alt="WASABI" className="w-6 h-6" />
+              <img src="/wasabilogo.png" alt="WASABI" className="w-6 h-6" />
               <span className="text-xs font-semibold tracking-wider uppercase opacity-70">WASABI Student Report</span>
             </div>
             <h2 className="text-2xl font-bold">{student.lastName}, {student.firstName}</h2>
