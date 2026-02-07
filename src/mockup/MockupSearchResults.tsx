@@ -171,7 +171,7 @@ export default function MockupSearchResults() {
               {sorted.map((student) => (
                 <tr
                   key={student.id}
-                  className="hover:bg-gray-50 dark:hover:bg-gray-750/50 transition-colors"
+                  className="hover:bg-wasabi-green/5 dark:hover:bg-wasabi-green/10 transition-colors"
                 >
                   <td className="px-3 py-3">
                     <input

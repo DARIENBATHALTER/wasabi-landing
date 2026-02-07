@@ -39,7 +39,7 @@ export default function MockupWelcome() {
     },
     {
       title: 'Flagging System',
-      description: 'Identify students who need support with automated flag rules for attendance, grades, and behavior.',
+      description: 'Identify students who need support with automated flag rules.',
       icon: <Flag size={28} />,
       path: '/try/flagging',
       color: 'from-orange-500/20 to-amber-500/10',
