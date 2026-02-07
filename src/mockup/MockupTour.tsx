@@ -14,6 +14,12 @@ interface TourStep {
 
 const tourSteps: TourStep[] = [
   {
+    target: 'welcome',
+    title: 'Welcome to WASABI!',
+    description: 'This interactive demo is loaded with realistic sample data so you can explore every feature. Use the sidebar to navigate, search for students, and see how WASABI brings all your data together. Let\'s take a quick tour!',
+    preNavigate: '/try',
+  },
+  {
     target: 'search',
     title: 'Search for Students',
     description: 'Find any student instantly by name, ID, or grade. WASABI searches across all enrolled students.',
@@ -272,7 +278,7 @@ export default function MockupTour() {
                   />
                 ))}
                 <span className="text-[10px] text-gray-500 ml-1.5">
-                  {currentStep + 1} of {tourSteps.length}
+                  {currentStep + 1}/{tourSteps.length}
                 </span>
               </div>
 

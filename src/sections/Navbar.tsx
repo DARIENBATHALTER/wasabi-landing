@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react'
 import { Menu, X } from 'lucide-react'
-import ThemeToggle from '../components/ThemeToggle'
 
 const navLinks = [
   { label: 'Features', href: '#features' },
@@ -46,21 +45,21 @@ export default function Navbar() {
       <nav
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
           isScrolled
-            ? 'glass-effect py-2 shadow-lg'
-            : 'bg-transparent py-4'
+            ? 'glass-effect py-3 shadow-lg'
+            : 'bg-transparent py-5'
         }`}
       >
         <div className="section-container flex items-center justify-between">
           {/* Logo + Name */}
-          <a href="/wasabi-landing/" className="flex items-center gap-2 group">
+          <a href="/wasabi-landing/" className="flex items-center gap-2.5 group">
             <img
               src="/wasabi-landing/wasabilogo.png"
               alt="WASABI Logo"
               className={`transition-all duration-300 ${
-                isScrolled ? 'w-7 h-7' : 'w-8 h-8'
+                isScrolled ? 'w-8 h-8' : 'w-9 h-9'
               }`}
             />
-            <span className="font-display font-bold text-lg text-gray-900 dark:text-white group-hover:text-wasabi-green transition-colors">
+            <span className="font-display font-bold text-xl text-gray-900 dark:text-white group-hover:text-wasabi-green transition-colors">
               WASABI
             </span>
           </a>
@@ -86,10 +85,9 @@ export default function Navbar() {
 
           {/* Desktop Right Side */}
           <div className="hidden md:flex items-center gap-3">
-            <ThemeToggle />
             <a
               href="/wasabi-landing/try"
-              className="btn-primary text-sm !px-4 !py-2"
+              className="btn-primary text-sm !px-5 !py-2.5"
             >
               Try WASABI
             </a>
@@ -97,7 +95,6 @@ export default function Navbar() {
 
           {/* Mobile Hamburger */}
           <div className="flex md:hidden items-center gap-2">
-            <ThemeToggle />
             <button
               onClick={() => setIsMobileOpen(!isMobileOpen)}
               className="p-2 rounded-lg text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"

@@ -51,7 +51,7 @@ export default function Footer() {
           {/* Right: Copyright */}
           <div className="text-center md:text-right">
             <p className="text-sm text-gray-400">
-              &copy; 2025 WASABI. All rights reserved.
+              &copy; 2026 QuietTools LLC. All rights reserved.
             </p>
           </div>
         </div>

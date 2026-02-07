@@ -30,13 +30,13 @@ export default function MockupSidebar() {
 
   const menuItems: MenuItem[] = [
     { label: 'Profile Search', icon: <Users size={20} />, path: '/try/search' },
-    { label: 'Student Reports', icon: <FileText size={20} />, tooltip: 'Available in full version' },
+    { label: 'Student Reports', icon: <FileText size={20} />, path: '/try/reports' },
     { label: 'Flagging System', icon: <Flag size={20} />, path: '/try/flagging' },
     { label: 'Class Analytics', icon: <BarChart3 size={20} />, path: '/try/analytics' },
-    { label: 'Grade Analytics', icon: <GraduationCap size={20} />, tooltip: 'Available in full version' },
-    { label: 'Exam Analytics', icon: <ClipboardList size={20} />, tooltip: 'Available in full version' },
-    { label: 'Observation', icon: <Eye size={20} />, tooltip: 'Available in full version' },
-    { label: 'Nori AI', icon: <Bot size={20} />, tooltip: 'Available in full version', badge: 'BETA' },
+    { label: 'Grade Analytics', icon: <GraduationCap size={20} />, path: '/try/grade-analytics' },
+    { label: 'Exam Analytics', icon: <ClipboardList size={20} />, path: '/try/exam-analytics' },
+    { label: 'Observation', icon: <Eye size={20} />, path: '/try/observation' },
+    { label: 'Nori AI', icon: <Bot size={20} />, path: '/try/nori', badge: 'BETA' },
   ]
 
   const isActive = (path?: string) => {

@@ -38,11 +38,11 @@ export default function CTASection() {
               Or reach out to learn how WASABI can work for your school.
             </p>
             <a
-              href="mailto:hello@wasabi-edu.com"
+              href="mailto:hello@wasabi.education"
               className="inline-flex items-center gap-2 text-wasabi-green hover:text-green-700 dark:hover:text-green-400 font-medium transition-colors"
             >
               <Mail className="w-4 h-4" />
-              hello@wasabi-edu.com
+              hello@wasabi.education
             </a>
           </div>
         </div>

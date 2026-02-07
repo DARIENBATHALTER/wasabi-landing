@@ -135,7 +135,7 @@ export default function MockupSearchResults() {
         <div className="overflow-x-auto">
           <table className="w-full">
             <thead>
-              <tr className="bg-gray-50 dark:bg-gray-750 border-b border-gray-200 dark:border-gray-700">
+              <tr className="bg-gray-50 dark:bg-gray-800/80 border-b border-gray-200 dark:border-gray-700">
                 <th className="w-10 px-3 py-3">
                   <input
                     type="checkbox"

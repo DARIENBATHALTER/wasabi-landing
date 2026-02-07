@@ -1,6 +1,5 @@
-import { useState } from 'react'
+import { useState, useEffect, useCallback, useRef } from 'react'
 import {
-  User,
   BarChart3,
   ShieldAlert,
   Bot,
@@ -12,9 +11,9 @@ import {
   CheckCircle,
   FileSpreadsheet,
   Flag,
+  Wrench,
 } from 'lucide-react'
 import { useScrollAnimation } from '../hooks/useScrollAnimation'
-import StudentAvatar from '../components/StudentAvatar'
 import GlassCard from '../components/GlassCard'
 
 interface TabData {
@@ -27,63 +26,46 @@ interface TabData {
   visual: React.ReactNode
 }
 
-function StudentProfileVisual() {
-  return (
-    <GlassCard className="p-5 max-w-xs mx-auto">
-      <div className="flex items-center gap-3 mb-4">
-        <StudentAvatar firstName="Maya" lastName="Rodriguez" gender="female" size="lg" />
-        <div>
-          <p className="font-semibold text-gray-900 dark:text-white text-sm">Maya Rodriguez</p>
-          <p className="text-xs text-gray-500 dark:text-gray-400">Grade 4 &middot; Ms. Johnson</p>
-        </div>
-      </div>
-      <div className="space-y-2">
-        {[
-          { label: 'GPA', value: '3.4', color: 'text-wasabi-green' },
-          { label: 'Attendance', value: '96%', color: 'text-blue-500' },
-          { label: 'iReady Math', value: '512', color: 'text-purple-500' },
-          { label: 'FAST Reading', value: 'L3', color: 'text-amber-500' },
-        ].map((stat) => (
-          <div
-            key={stat.label}
-            className="flex items-center justify-between py-1.5 px-3 rounded-lg bg-gray-50 dark:bg-gray-700/50 text-sm"
-          >
-            <span className="text-gray-600 dark:text-gray-400">{stat.label}</span>
-            <span className={`font-semibold ${stat.color}`}>{stat.value}</span>
-          </div>
-        ))}
-      </div>
-    </GlassCard>
-  )
-}
-
 function AnalyticsVisual() {
-  const bars = [
-    { label: 'ELA', height: 72, color: 'bg-wasabi-green' },
-    { label: 'Math', height: 58, color: 'bg-blue-500' },
-    { label: 'Sci', height: 85, color: 'bg-purple-500' },
-    { label: 'SS', height: 64, color: 'bg-amber-500' },
+  const subjects = [
+    { label: 'ELA', pct: 72, color: '#008800' },
+    { label: 'Math', pct: 58, color: '#3b82f6' },
+    { label: 'Science', pct: 85, color: '#7c3aed' },
+    { label: 'Soc. Studies', pct: 64, color: '#f59e0b' },
   ]
 
   return (
-    <GlassCard className="p-5 max-w-xs mx-auto">
+    <GlassCard className="p-6 w-full max-w-md mx-auto">
       <p className="text-sm font-semibold text-gray-900 dark:text-white mb-1">
-        Grade 3 &mdash; Proficiency Rates
+        Grade 3 &mdash; Proficiency Overview
       </p>
-      <p className="text-xs text-gray-500 dark:text-gray-400 mb-4">Q2 Assessment Results</p>
-      <div className="flex items-end justify-around gap-3 h-32">
-        {bars.map((bar) => (
-          <div key={bar.label} className="flex flex-col items-center gap-1 flex-1">
-            <span className="text-xs font-medium text-gray-600 dark:text-gray-400">
-              {bar.height}%
-            </span>
-            <div
-              className={`w-full rounded-t-md ${bar.color} transition-all duration-700`}
-              style={{ height: `${bar.height}%` }}
-            />
-            <span className="text-xs text-gray-500 dark:text-gray-400">{bar.label}</span>
+      <p className="text-xs text-gray-500 dark:text-gray-400 mb-5">Q2 Assessment Results</p>
+
+      <div className="space-y-4">
+        {subjects.map((s) => (
+          <div key={s.label}>
+            <div className="flex items-center justify-between mb-1.5">
+              <span className="text-sm font-medium text-gray-700 dark:text-gray-300">{s.label}</span>
+              <span className="text-sm font-bold" style={{ color: s.color }}>{s.pct}%</span>
+            </div>
+            <div className="w-full h-3 rounded-full bg-gray-100 dark:bg-gray-700 overflow-hidden">
+              <div
+                className="h-full rounded-full transition-all duration-700"
+                style={{ width: `${s.pct}%`, backgroundColor: s.color }}
+              />
+            </div>
           </div>
         ))}
+      </div>
+
+      <div className="mt-5 pt-4 border-t border-gray-100 dark:border-gray-700">
+        <div className="flex items-center justify-between">
+          <span className="text-xs text-gray-500 dark:text-gray-400">Class Average</span>
+          <span className="text-lg font-bold text-wasabi-green">70%</span>
+        </div>
+        <p className="text-xs text-gray-400 dark:text-gray-500 mt-1">
+          +4% from Q1 &middot; 28 students
+        </p>
       </div>
     </GlassCard>
   )
@@ -97,18 +79,18 @@ function EarlyWarningVisual() {
   ]
 
   return (
-    <GlassCard className="p-5 max-w-xs mx-auto">
-      <p className="text-sm font-semibold text-gray-900 dark:text-white mb-3">
+    <GlassCard className="p-6 w-full max-w-md mx-auto">
+      <p className="text-sm font-semibold text-gray-900 dark:text-white mb-4">
         Active Alerts
       </p>
-      <div className="space-y-2.5">
+      <div className="space-y-3">
         {alerts.map((alert) => (
           <div
             key={alert.name}
-            className="flex items-center gap-3 p-2.5 rounded-lg bg-gray-50 dark:bg-gray-700/50"
+            className="flex items-center gap-3 p-3 rounded-lg bg-gray-50 dark:bg-gray-700/50"
           >
-            <div className={`w-8 h-8 rounded-full ${alert.color} flex items-center justify-center flex-shrink-0`}>
-              <alert.icon className="w-4 h-4 text-white" />
+            <div className={`w-10 h-10 rounded-full ${alert.color} flex items-center justify-center flex-shrink-0`}>
+              <alert.icon className="w-5 h-5 text-white" />
             </div>
             <div className="min-w-0">
               <p className="text-sm font-medium text-gray-900 dark:text-white truncate">
@@ -125,24 +107,29 @@ function EarlyWarningVisual() {
 
 function AIChatVisual() {
   return (
-    <GlassCard className="p-5 max-w-xs mx-auto">
-      <div className="flex items-center gap-2 mb-4">
-        <div className="w-7 h-7 rounded-full bg-wasabi-green flex items-center justify-center">
+    <GlassCard className="p-6 w-full max-w-md mx-auto">
+      <div className="flex items-center gap-2 mb-5">
+        <div className="w-8 h-8 rounded-full bg-gradient-to-br from-purple-500 to-violet-600 flex items-center justify-center">
           <Bot className="w-4 h-4 text-white" />
         </div>
         <span className="text-sm font-semibold text-gray-900 dark:text-white">Nori</span>
-        <span className="text-xs text-gray-400 ml-auto">AI Assistant</span>
+        <span className="text-[10px] px-2 py-0.5 rounded-full bg-purple-100 dark:bg-purple-900/30 text-purple-600 dark:text-purple-300 font-semibold ml-auto">AI Assistant</span>
       </div>
       <div className="space-y-3">
         <div className="bg-gray-100 dark:bg-gray-700 rounded-xl rounded-tl-sm p-3">
-          <p className="text-xs text-gray-700 dark:text-gray-300 leading-relaxed">
+          <p className="text-sm text-gray-700 dark:text-gray-300 leading-relaxed">
             Show me all 3rd graders who scored below level on FAST but have a GPA above 3.0.
           </p>
         </div>
-        <div className="bg-wasabi-green/10 rounded-xl rounded-tr-sm p-3 ml-4">
-          <p className="text-xs text-gray-700 dark:text-gray-300 leading-relaxed">
+        <div className="bg-wasabi-green/10 rounded-xl rounded-tr-sm p-3 ml-6">
+          <p className="text-sm text-gray-700 dark:text-gray-300 leading-relaxed">
             Found <span className="font-semibold text-wasabi-green">7 students</span> matching
             that criteria. 3 also have attendance flags. Want me to generate a report?
+          </p>
+        </div>
+        <div className="bg-gray-100 dark:bg-gray-700 rounded-xl rounded-tl-sm p-3">
+          <p className="text-sm text-gray-700 dark:text-gray-300 leading-relaxed">
+            Yes, and include their attendance trends for this semester.
           </p>
         </div>
       </div>
@@ -152,39 +139,48 @@ function AIChatVisual() {
 
 function SOBAVisual() {
   const items = [
-    { label: 'Classroom Management', checked: true },
-    { label: 'Student Engagement', checked: true },
-    { label: 'Instructional Delivery', checked: false },
-    { label: 'Differentiation', checked: false },
+    { label: 'Classroom Management', rating: 5, checked: true },
+    { label: 'Student Engagement', rating: 4, checked: true },
+    { label: 'Instructional Delivery', rating: 0, checked: false },
+    { label: 'Differentiation', rating: 0, checked: false },
   ]
 
   return (
-    <GlassCard className="p-5 max-w-xs mx-auto">
-      <div className="flex items-center gap-2 mb-4">
+    <GlassCard className="p-6 w-full max-w-md mx-auto">
+      <div className="flex items-center gap-2 mb-5">
         <ClipboardList className="w-5 h-5 text-wasabi-green" />
         <span className="text-sm font-semibold text-gray-900 dark:text-white">
           SOBA Observation
         </span>
       </div>
-      <p className="text-xs text-gray-500 dark:text-gray-400 mb-3">
+      <p className="text-xs text-gray-500 dark:text-gray-400 mb-4">
         Ms. Johnson &middot; Room 204 &middot; In Progress
       </p>
-      <div className="space-y-2">
+      <div className="space-y-2.5">
         {items.map((item) => (
           <div
             key={item.label}
-            className="flex items-center gap-2.5 p-2 rounded-lg bg-gray-50 dark:bg-gray-700/50"
+            className="flex items-center justify-between p-3 rounded-lg bg-gray-50 dark:bg-gray-700/50"
           >
-            <div
-              className={`w-5 h-5 rounded flex items-center justify-center flex-shrink-0 ${
-                item.checked
-                  ? 'bg-wasabi-green text-white'
-                  : 'border-2 border-gray-300 dark:border-gray-600'
-              }`}
-            >
-              {item.checked && <CheckCircle className="w-3.5 h-3.5" />}
+            <div className="flex items-center gap-2.5">
+              <div
+                className={`w-5 h-5 rounded flex items-center justify-center flex-shrink-0 ${
+                  item.checked
+                    ? 'bg-wasabi-green text-white'
+                    : 'border-2 border-gray-300 dark:border-gray-600'
+                }`}
+              >
+                {item.checked && <CheckCircle className="w-3.5 h-3.5" />}
+              </div>
+              <span className="text-sm text-gray-700 dark:text-gray-300">{item.label}</span>
             </div>
-            <span className="text-sm text-gray-700 dark:text-gray-300">{item.label}</span>
+            {item.rating > 0 && (
+              <div className="flex gap-0.5">
+                {Array.from({ length: 5 }).map((_, i) => (
+                  <div key={i} className={`w-2 h-2 rounded-full ${i < item.rating ? 'bg-amber-400' : 'bg-gray-300 dark:bg-gray-600'}`} />
+                ))}
+              </div>
+            )}
           </div>
         ))}
       </div>
@@ -198,34 +194,40 @@ function DataImportVisual() {
     { name: 'iReady', color: 'bg-purple-500' },
     { name: 'FAST', color: 'bg-orange-500' },
     { name: 'STAR', color: 'bg-amber-500' },
-    { name: 'Excel', color: 'bg-green-600' },
-    { name: 'CSV', color: 'bg-gray-500' },
+    { name: 'Achieve3000', color: 'bg-teal-500' },
+    { name: 'Excel/CSV', color: 'bg-green-600' },
   ]
 
   return (
-    <GlassCard className="p-5 max-w-xs mx-auto">
-      <div className="flex items-center gap-2 mb-4">
+    <GlassCard className="p-6 w-full max-w-md mx-auto">
+      <div className="flex items-center gap-2 mb-5">
         <FileSpreadsheet className="w-5 h-5 text-wasabi-green" />
         <span className="text-sm font-semibold text-gray-900 dark:text-white">
-          Supported Sources
+          Data Sources
         </span>
       </div>
-      <div className="grid grid-cols-2 gap-2">
+      <div className="grid grid-cols-2 gap-2.5 mb-4">
         {sources.map((source) => (
           <div
             key={source.name}
-            className="flex items-center gap-2 p-2.5 rounded-lg bg-gray-50 dark:bg-gray-700/50"
+            className="flex items-center gap-2.5 p-3 rounded-lg bg-gray-50 dark:bg-gray-700/50"
           >
-            <div className={`w-2.5 h-2.5 rounded-full ${source.color} flex-shrink-0`} />
+            <div className={`w-3 h-3 rounded-full ${source.color} flex-shrink-0`} />
             <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
               {source.name}
             </span>
           </div>
         ))}
       </div>
-      <div className="mt-3 p-2.5 rounded-lg bg-wasabi-green/10 text-center">
-        <p className="text-xs text-wasabi-green font-medium">
-          Drag & drop to import
+      <div className="p-3 rounded-lg bg-wasabi-green/10 border border-wasabi-green/20">
+        <div className="flex items-center gap-2 mb-1">
+          <Wrench className="w-3.5 h-3.5 text-wasabi-green" />
+          <p className="text-xs font-semibold text-wasabi-green">Custom Integrations</p>
+        </div>
+        <p className="text-xs text-gray-600 dark:text-gray-400 leading-relaxed">
+          Need a data source we don't support yet? We'll build a custom integration for
+          <span className="font-semibold text-gray-800 dark:text-gray-200"> any </span>
+          system your school uses.
         </p>
       </div>
     </GlassCard>
@@ -233,21 +235,6 @@ function DataImportVisual() {
 }
 
 const tabs: TabData[] = [
-  {
-    id: 'profiles',
-    label: 'Student Profiles',
-    icon: User,
-    title: 'Every data point, one screen',
-    description:
-      'No more toggling between systems. WASABI pulls together attendance, grades, assessment scores, behavior records, and demographic data into a single, beautiful student profile.',
-    bullets: [
-      'Unified view of all student data in one place',
-      'Real-time data from every connected source',
-      'Customizable profile cards for quick scanning',
-      'Full history and trend tracking per student',
-    ],
-    visual: <StudentProfileVisual />,
-  },
   {
     id: 'analytics',
     label: 'Analytics',
@@ -280,7 +267,7 @@ const tabs: TabData[] = [
   },
   {
     id: 'ai-assistant',
-    label: 'AI Assistant',
+    label: 'Nori AI',
     icon: Bot,
     title: 'Meet Nori, your data copilot',
     description:
@@ -314,12 +301,12 @@ const tabs: TabData[] = [
     icon: FileUp,
     title: 'Works with the tools you already use',
     description:
-      'No complicated migrations or IT projects. Just drag, drop, and match. WASABI understands the formats your district already uses.',
+      'No complicated migrations or IT projects. Just drag, drop, and match. WASABI understands the formats your district already uses — and we\'ll build custom integrations for any data source you need.',
     bullets: [
       'Import from FOCUS, iReady, FAST, STAR, and more',
       'Support for Excel, CSV, and standardized exports',
       'Smart column matching with fuzzy student lookup',
-      'Import validation with detailed error reporting',
+      'Custom integrations built for your school\'s unique data sources',
     ],
     visual: <DataImportVisual />,
   },
@@ -328,6 +315,24 @@ const tabs: TabData[] = [
 export default function FeatureTabs() {
   const [activeTab, setActiveTab] = useState(0)
   const { ref, isVisible } = useScrollAnimation()
+  const timerRef = useRef<ReturnType<typeof setInterval>>(null)
+
+  const advance = useCallback(() => {
+    setActiveTab(prev => (prev + 1) % tabs.length)
+  }, [])
+
+  // Auto-advance every 7 seconds
+  useEffect(() => {
+    timerRef.current = setInterval(advance, 7000)
+    return () => { if (timerRef.current) clearInterval(timerRef.current) }
+  }, [advance])
+
+  // Reset timer on manual click
+  const handleTabClick = useCallback((index: number) => {
+    setActiveTab(index)
+    if (timerRef.current) clearInterval(timerRef.current)
+    timerRef.current = setInterval(advance, 7000)
+  }, [advance])
 
   const active = tabs[activeTab]
 
@@ -346,7 +351,7 @@ export default function FeatureTabs() {
             <span className="gradient-text">in one place</span>
           </h2>
           <p className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
-            Six powerful tools working together to give you the clearest picture of every student.
+            Powerful tools working together to give you the clearest picture of every student.
           </p>
         </div>
 
@@ -355,7 +360,7 @@ export default function FeatureTabs() {
           {tabs.map((tab, index) => (
             <button
               key={tab.id}
-              onClick={() => setActiveTab(index)}
+              onClick={() => handleTabClick(index)}
               className={`flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-medium transition-all duration-200 ${
                 activeTab === index
                   ? 'bg-wasabi-green text-white shadow-md shadow-wasabi-green/20'

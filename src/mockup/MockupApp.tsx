@@ -7,6 +7,11 @@ import MockupSearchResults from './MockupSearchResults'
 import MockupProfileCard from './MockupProfileCard'
 import MockupAnalytics from './MockupAnalytics'
 import MockupFlagging from './MockupFlagging'
+import MockupStudentReports from './MockupStudentReports'
+import MockupGradeAnalytics from './MockupGradeAnalytics'
+import MockupExamAnalytics from './MockupExamAnalytics'
+import MockupObservation from './MockupObservation'
+import MockupNoriPage from './MockupNoriPage'
 
 interface MockupContextType {
   searchQuery: string
@@ -66,6 +71,11 @@ export default function MockupApp() {
           <Route path="profile" element={<MockupProfileCard />} />
           <Route path="analytics" element={<MockupAnalytics />} />
           <Route path="flagging" element={<MockupFlagging />} />
+          <Route path="reports" element={<MockupStudentReports />} />
+          <Route path="grade-analytics" element={<MockupGradeAnalytics />} />
+          <Route path="exam-analytics" element={<MockupExamAnalytics />} />
+          <Route path="observation" element={<MockupObservation />} />
+          <Route path="nori" element={<MockupNoriPage />} />
           <Route path="*" element={<Navigate to="/try" replace />} />
         </Route>
       </Routes>

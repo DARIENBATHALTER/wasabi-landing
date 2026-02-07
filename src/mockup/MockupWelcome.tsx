@@ -48,7 +48,7 @@ export default function MockupWelcome() {
       title: 'Student Reports',
       description: 'Generate and export detailed reports for individual students or entire classes.',
       icon: <FileText size={28} />,
-      tooltip: 'Available in full version',
+      path: '/try/reports',
       color: 'from-purple-500/20 to-violet-500/10',
     },
   ]
@@ -65,7 +65,7 @@ export default function MockupWelcome() {
   return (
     <div className="max-w-4xl mx-auto flex flex-col items-center justify-center min-h-[calc(100vh-8rem)]">
       {/* Logo and title */}
-      <div className="text-center mb-10 animate-fade-in">
+      <div data-tour="welcome" className="text-center mb-10 animate-fade-in">
         <img
           src="/wasabi-landing/wasabilogo.png"
           alt="WASABI"

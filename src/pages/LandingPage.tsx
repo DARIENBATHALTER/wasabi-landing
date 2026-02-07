@@ -2,6 +2,7 @@ import { useTheme } from '../hooks/useTheme'
 import Navbar from '../sections/Navbar'
 import Hero from '../sections/Hero'
 import ProblemStatement from '../sections/ProblemStatement'
+import ProfileShowcase from '../sections/ProfileShowcase'
 import FeatureTabs from '../sections/FeatureTabs'
 import StatsSection from '../sections/StatsSection'
 import CTASection from '../sections/CTASection'
@@ -16,6 +17,7 @@ export default function LandingPage() {
       <Navbar />
       <Hero />
       <ProblemStatement />
+      <ProfileShowcase />
       <FeatureTabs />
       <StatsSection />
       <CTASection />
