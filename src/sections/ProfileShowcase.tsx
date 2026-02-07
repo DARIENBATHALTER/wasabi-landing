@@ -103,17 +103,17 @@ export default function ProfileShowcase() {
               <span className="gradient-text">one screen</span>
             </h2>
             <p className="text-lg text-gray-600 dark:text-gray-400 mb-6 leading-relaxed">
-              No more toggling between FOCUS, iReady, FAST, and a half-dozen other systems.
-              WASABI pulls together every piece of student data into a single, beautiful profile
-              with collapsible sections you can drill into.
+              No more toggling between platforms. WASABI pulls every piece of student
+              data into a single profile — attendance, grades, assessments, behavior — so
+              nothing falls through the cracks.
             </p>
             <ul className="space-y-3 mb-8">
               {[
-                'Attendance, grades, assessments, and behavior — unified',
-                'Built around FOCUS, FAST, and iReady — the systems Florida schools actually use',
-                'Collapsible sections let you focus on what matters',
+                'Parent conference prep in 30 seconds',
                 'Trend charts show growth at a glance',
                 'Automatic flags highlight students who need support',
+                'Share profiles with your intervention team instantly',
+                'Every data source your school uses, in one view',
               ].map((item, i) => (
                 <li key={i} className="flex items-start gap-3">
                   <div className="w-5 h-5 rounded-full bg-wasabi-green/10 flex items-center justify-center flex-shrink-0 mt-0.5">

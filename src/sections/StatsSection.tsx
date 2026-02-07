@@ -18,9 +18,9 @@ const stats = [
     label: 'FERPA Compliant',
   },
   {
-    end: 1,
+    end: 180,
     suffix: '',
-    label: 'Local Team, One Call Away',
+    label: 'School Days Tracked Per Student',
   },
 ]
 

@@ -209,10 +209,10 @@ const tabs: TabData[] = [
     icon: BarChart3,
     title: 'See the patterns that matter',
     description:
-      'From classroom-level snapshots to grade-wide trends, WASABI gives your school the visual analytics tools that big districts take for granted — without the big district price tag or complexity.',
+      'From classroom-level snapshots to grade-wide trends, WASABI gives your school the visual analytics tools that big districts take for granted, without the big district price tag.',
     bullets: [
       'Class and grade-level performance dashboards',
-      'Trend analysis across FAST, iReady, and other Florida assessments',
+      'Trend analysis across every assessment window',
       'Filterable charts by demographics and subgroups',
       'Export-ready reports for leadership and district',
     ],
@@ -224,7 +224,7 @@ const tabs: TabData[] = [
     icon: ShieldAlert,
     title: 'Catch it before it\'s too late',
     description:
-      'WASABI\'s early warning system automatically flags students who are showing signs of falling behind — pulling from FAST scores, iReady diagnostics, attendance, and grades — so your team can intervene at the right time.',
+      'WASABI\'s early warning system automatically flags students showing signs of falling behind, pulling from assessment scores, attendance, and grades so your team can intervene at the right time.',
     bullets: [
       'Automatic flags for attendance, grades, and behavior',
       'Customizable thresholds for your school\'s needs',
@@ -237,14 +237,14 @@ const tabs: TabData[] = [
     id: 'pd',
     label: 'Prof. Development',
     icon: ClipboardList,
-    title: 'Structured classroom observations',
+    title: 'Coach with confidence',
     description:
-      'WASABI\'s built-in observation tool gives coaches and administrators a consistent, data-driven framework for classroom walkthroughs and professional development.',
+      'Give your coaches and administrators a structured, repeatable observation tool for classroom walkthroughs, with data that rolls up into actionable professional development plans.',
     bullets: [
       'Customizable observation rubrics and checklists',
       'Real-time observation capture on any device',
-      'Aggregate observation data across teachers',
-      'Actionable feedback tied to professional development',
+      'Aggregate trends across teachers and coaches',
+      'Feedback that ties directly to growth plans',
     ],
     visual: <PDVisual />,
   },
@@ -254,12 +254,12 @@ const tabs: TabData[] = [
     icon: FileUp,
     title: 'Works with the tools you already use',
     description:
-      'No complicated migrations or IT projects. Just drag, drop, and match. WASABI natively understands FOCUS exports, FAST results, and iReady diagnostics — the formats Florida schools actually work with — and we\'ll build custom integrations for any other data source you need.',
+      'No complicated migrations or IT projects. Just drag, drop, and match. WASABI natively understands the export formats Florida schools actually work with, and we\'ll build custom integrations for any data source you need.',
     bullets: [
-      'Native support for FOCUS, iReady, FAST, STAR, and other Florida platforms',
-      'Support for Excel, CSV, and standardized exports',
+      'Native support for FOCUS, iReady, FAST, STAR, and more',
+      'Drag-and-drop Excel, CSV, and standardized exports',
       'Smart column matching with fuzzy student lookup',
-      'Custom integrations built for your school\'s unique data sources',
+      'Custom integrations built for your school\'s unique needs',
     ],
     visual: <DataImportVisual />,
   },
@@ -300,11 +300,12 @@ export default function FeatureTabs() {
         {/* Heading */}
         <div className="text-center mb-12">
           <h2 className="font-display font-bold text-3xl sm:text-4xl md:text-5xl text-gray-900 dark:text-white mb-4">
-            Everything you need,{' '}
-            <span className="gradient-text">in one place</span>
+            Purpose-built for{' '}
+            <span className="gradient-text">how schools actually work</span>
           </h2>
           <p className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
-            Powerful tools working together to give you the clearest picture of every student.
+            From daily walkthroughs to end-of-year reports, every tool is designed
+            around the workflows Florida educators already follow.
           </p>
         </div>
 

@@ -21,12 +21,12 @@ export default function CTASection() {
         </h2>
 
         <p className="text-lg text-gray-600 dark:text-gray-400 max-w-xl mx-auto mb-4">
-          Try the interactive demo — no signup required.
+          WASABI is built and supported in Florida by educators who know your
+          systems, your challenges, and your students. When you work with us,
+          you're not a ticket number — you're a partner.
         </p>
         <p className="text-sm text-gray-500 dark:text-gray-500 max-w-lg mx-auto mb-10">
-          WASABI is built and supported in Florida by educators who know your systems,
-          your challenges, and your students. When you work with us, you're not a
-          ticket number — you're a partner.
+          Try the interactive demo — no signup required.
         </p>
 
         <div className="flex flex-col items-center gap-4">

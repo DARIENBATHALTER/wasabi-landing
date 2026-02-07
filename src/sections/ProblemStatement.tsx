@@ -55,9 +55,8 @@ export default function ProblemStatement() {
           </h2>
           <p className="text-lg text-gray-600 dark:text-gray-400 leading-relaxed">
             Between FOCUS, iReady, FAST, STAR, and every other platform your school depends
-            on — your most critical student data is scattered across systems that don't talk
-            to each other. We work with these Florida systems every day, so we know the full
-            picture matters — and that building it takes hours you don't have.
+            on, your most critical student data is scattered across systems that don't talk
+            to each other. Building the full picture takes hours you don't have.
           </p>
         </div>
 
