@@ -105,7 +105,7 @@ export default function ProblemStatement() {
         <div className="text-center">
           <p className="font-display font-semibold text-2xl sm:text-3xl text-gray-900 dark:text-white">
             There's a{' '}
-            <span className="gradient-text glow-green inline-block px-1">
+            <span className="gradient-text">
               better way
             </span>
             .
